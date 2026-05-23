@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+deploy_nginx:
+  stage: deploy
+  only:
+    - main
+  script:
+    - cd ~/infra/nginx-proxy && git pull && docker exec nginx nginx -t && docker exec nginx nginx -s reload
