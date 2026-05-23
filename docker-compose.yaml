@@ -12,6 +12,36 @@ services:
     
     networks:
       - library
+  
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    container_name: gitlab
+    restart: unless-stopped
+    hostname: gitlab.local
+
+    environment:
+      GITLAB_HOST: ${HOST}
+
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://${HOST}/gitlab'
+
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+
+    ports:
+      - "2222:22"
+
+    volumes:
+      - ../gitlab/config:/etc/gitlab
+      - ../gitlab/logs:/var/log/gitlab
+      - ../gitlab/data:/var/opt/gitlab
+
+    shm_size: "256m"
+
+    networks:
+      - library
 
 networks:
   library:
