@@ -34,9 +34,9 @@ services:
       - "2222:22"
 
     volumes:
-      - ../gitlab/config:/etc/gitlab
-      - ../gitlab/logs:/var/log/gitlab
-      - ../gitlab/data:/var/opt/gitlab
+      - /home/ansible/gitlab-volumes/config:/etc/gitlab
+      - /home/ansible/gitlab-volumes/logs:/var/log/gitlab
+      - /home/ansible/gitlab-volumes/data:/var/opt/gitlab
 
     shm_size: "256m"
 
