@@ -8,7 +8,7 @@ services:
       - "80:80"
 
     volumes:
-      - /home/ansible/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./conf.d:/etc/nginx/conf.d:ro
     
     networks:
       - library
